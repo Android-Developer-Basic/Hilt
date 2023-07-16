@@ -6,8 +6,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import otus.gpb.hilt.databinding.ActivityMainBinding
 import javax.inject.Inject
 import javax.inject.Qualifier
@@ -48,13 +48,13 @@ class MainActivity : ComponentActivity() {
 annotation class NextNum
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 class ActivityModule {
 
     private var nextNum = 1
 
     @Provides
-    @ActivityScoped
+    @ActivityRetainedScoped
     fun str(): String = "String"
 
     @NextNum

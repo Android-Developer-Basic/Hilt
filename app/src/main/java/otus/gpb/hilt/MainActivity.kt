@@ -10,14 +10,23 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import otus.gpb.hilt.databinding.ActivityMainBinding
 import javax.inject.Inject
+import javax.inject.Qualifier
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @set:Inject
-    var num: Int = 0
+    @Num
+    @Inject
+    @JvmField
+    var num: Int? = null
 
-    @set:Inject
+    @NextNum
+    @Inject
+    @JvmField
+    var nextNum: Int = 0
+
+    @Inject
+    @JvmField
     var str: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,17 +36,29 @@ class MainActivity : ComponentActivity() {
         setContentView(view.root)
 
         with(view) {
-            numView.text = num.toString()
-            strView.text = str
+            numView.text = "Num: $num"
+            nextNumView.text = "NextNum: $nextNum"
+            strView.text = "Str: $str"
         }
     }
 }
 
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class NextNum
+
 @Module
 @InstallIn(ActivityComponent::class)
 class ActivityModule {
+
+    private var nextNum = 1
+
     @Provides
     @ActivityScoped
     fun str(): String = "String"
+
+    @NextNum
+    @Provides
+    fun nextNum(): Int = nextNum++
 }
 

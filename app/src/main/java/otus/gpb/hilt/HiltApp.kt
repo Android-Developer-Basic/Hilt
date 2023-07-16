@@ -10,7 +10,12 @@ import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @HiltAndroidApp
-class HiltApp : Application()
+class HiltApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        LoggerInitializer.init(applicationContext)
+    }
+}
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)

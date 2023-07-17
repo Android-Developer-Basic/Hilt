@@ -37,4 +37,18 @@
         android:layout_height="wrap_content"
         android:text="Open with param"
         android:id="@+id/button"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create custom component"
+        android:id="@+id/customButton"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:id="@+id/customComponentView"
+        />
+
 </LinearLayout>
